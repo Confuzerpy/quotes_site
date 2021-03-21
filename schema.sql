@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS main;
+CREATE TABLE main (
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    name  STRING,
+    price STRING
+);
