@@ -3,7 +3,7 @@ import sqlite3
 
 connection = sqlite3.connect('database.db')
 
-
+# инициализируем бд
 with open('schema.sql') as db:
     connection.executescript(db.read())
 

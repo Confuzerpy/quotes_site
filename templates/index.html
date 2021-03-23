@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %}title{% endblock %}</h1>
+    <h1>{% block title %}Котировки{% endblock %}</h1>
     {% for col in main %}
-    	<a href="#">
-    		<h2>{{ col['id'] }}</h2>
+    	<a >
+    		<h4>{{ col['id'] }}</h4>
+    		<div class="price" style="position: relative; top: -41px; left: 50px;"><h4>{{ col['price'] }}</h4></div>
+    		<div class="name" style="position: relative; top: -41px; left: 100px;"><h3>{{ col['name'] }}</h3></div>
     	</a>
-    		<h3>{{ col['price'] }}</h3>
-    	<span class="badge badge-primary">{{ col['name'] }}</span>
+    		<!-- <h3>{{ col['name'] }}</h3> -->
     	<hr>
     {% endfor %}
 {% endblock %}

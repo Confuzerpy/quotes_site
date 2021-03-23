@@ -4,13 +4,14 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
+"""Получаем данные из БД"""
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
 
 
+"""Главная страница"""
 @app.route('/')
 def index():
     conn = get_db_connection()
