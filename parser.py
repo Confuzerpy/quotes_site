@@ -1,9 +1,23 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 
 
-url = 'https://api.cryptonator.com/api/full/btc-usd'
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'lxml')
+def get_html(url):
+    request = requests.get(url)
+    return request.text
 
-print(soup
+
+def main():
+    for i in range(1, 41):
+        # проходимя по каждой странице и парсим содержимое по тегу <p>
+        html = get_html(f'https://coinlib.io/api/v1/coinlist?\
+            key=c76dcc904bccf9e7&pref=USD&page={str(i)}&order=rank')
+        soup = bs(html, 'lxml')
+        res = soup.find_all('p')
+
+        for r in res:
+            return r.text
+
+
+if __name__ == '__main__':
+    main()
