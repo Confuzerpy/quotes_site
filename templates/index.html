@@ -1,14 +1,114 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %}Котировки{% endblock %}</h1>
-    {% for col in main %}
-    	<a >
-    		<h4>{{ col['id'] }}</h4>
-    		<div class="price" style="position: relative; top: -41px; left: 50px;"><h4>{{ col['price'] }}</h4></div>
-    		<div class="name" style="position: relative; top: -41px; left: 100px;"><h3>{{ col['name'] }}</h3></div>
-    	</a>
-    		<!-- <h3>{{ col['name'] }}</h3> -->
-    	<hr>
+ <!--    <h1>{% block title %}Котировки{% endblock %}</h1> -->
+    <style>
+
+    	/* Pagination links */
+		.pagination a {
+		    color: black;
+		    float: center;
+		    padding: 8px 16px;
+		    text-decoration: none;
+		    transition: background-color .3s;
+		}
+
+		/* Style the active/current link */
+		.pagination a.active {
+		    background-color: dodgerblue;
+		    color: white;
+		}
+
+		/* Add a grey background color on mouse-over */
+		.pagination a:hover:not(.active) {background-color: #ddd;}
+
+		.status {
+			justify-self: left;
+
+		}
+
+		.coin {
+			display: grid;
+			grid-template-columns: 1fr 2fr 3fr 3fr 4fr 4fr 1fr;
+			/*grid-template-columns:repeat(7, 1fr);*/
+			/*grid-gap: 2em;*/
+			grid-row-gap: 5em
+			 /*grid-auto-rows: : 150px; */
+			/*grid-auto-rows: minmax(100px, auto);*/
+		}
+
+		.name_columns {
+			display: grid;
+			grid-template-columns: 1fr 2fr 3fr 3fr 4fr 4fr 1fr;
+			grid-gap: 5em;
+		}
+
+	</style>
+
+<!--     <div class="status">
+		<a href="/">Котировки</a>
+	</div> -->
+	<div class="name_columns">
+		<div class="id">
+			id
+		</div>
+		<div class="symbol">
+			symbol
+    	</div>
+    	<div class="name">
+    		name
+    	</div>
+    	<div class="price">
+    		price
+    	</div>
+    	<div class="market_cap">
+    		market_cap
+    	</div>
+    	<div class="volume_24h">
+    		volume_24h
+    	</div>
+    	<div class="delta_24h">
+    		delta_24h
+    	</div>
+	</div>
+	{% for col in main %}
+    	<div class="coin">
+    		<div class="id">
+    		{{ col['id'] }}
+    		</div>
+    		<div class="symbol">
+    			{{ col['symbol'] }}
+    		</div>
+    		<div class="name">
+    			{{ col['name'] }}
+    		</div>
+    		<div class="price">
+    			{{ col['price'] }}
+    		</div>
+    		<div class="market_cap">
+    			{{ col['market_cap'] }}
+    		</div>
+    		<div class="volume_24h">
+    			{{ col['volume_24h'] }}
+    		</div>
+    		<div class="delta_24h">
+    			{{ col['delta_24h'] }}
+    		</div>
+    	</div>
     {% endfor %}
+   	<div class="pagination">
+		<a href="#">&laquo;</a>
+		<a href="#">1</a>
+		<a class="active" href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#">6</a>
+		<a href="#">&raquo;</a>
+	</div>
 {% endblock %}
+
+
+
+
+
