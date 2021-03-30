@@ -7,7 +7,7 @@
     	/* Pagination links */
 		.pagination a {
 		    color: black;
-		    float: center;
+		    justify-self: center;
 		    padding: 8px 16px;
 		    text-decoration: none;
 		    transition: background-color .3s;
@@ -39,7 +39,7 @@
 
 		.name_columns {
 			display: grid;
-			grid-template-columns: 1fr 2fr 3fr 3fr 4fr 4fr 1fr;
+			grid-template-columns: 1fr 0.5fr 2fr 3fr 4fr 4fr 1fr;
 			grid-gap: 5em;
 		}
 
@@ -97,14 +97,26 @@
     	</div>
     {% endfor %}
    	<div class="pagination">
-		<a href="#">&laquo;</a>
-		<a href="#">1</a>
+   		<li {% if not pages.has_prev %} class="disabled" {% endif %}>
+			<a href="./?page={{ pages.prev_num }}">&laquo;</a>
+   		</li>
+   		{% for page in pages.iter_pages() %}
+
+   			<li {% if page == pages.page %} class="active" {% endif %}>
+
+   				<a href="./?page={{ page }}"> {{ page }} </a>
+
+   			</li>
+   		{% endfor %}
+<!-- 		<a href="#">1</a>
 		<a class="active" href="#">2</a>
 		<a href="#">3</a>
 		<a href="#">4</a>
 		<a href="#">5</a>
 		<a href="#">6</a>
-		<a href="#">&raquo;</a>
+ -->		<li {% if not pages.has_next %} class="disabled" {% endif %}>
+			<a href="./?page={{ pages.next_num }}">&raquo;</a>
+		</li>
 	</div>
 {% endblock %}
 
