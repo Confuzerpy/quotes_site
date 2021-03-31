@@ -27,6 +27,10 @@ class Coin(db.Model):
     db.session.flush()
     db.session.commit()
     db.create_all()
+
+    def __repr__(self):
+        return 'Coin %r' % self.id
+
     # print('db is create')
 
     # def create_db(self):
@@ -56,6 +60,7 @@ class Coin(db.Model):
 
 
 @app.route('/')
+# @app.route('/page=<string:page>/')
 def index():
     page = request.args.get('page')
 
@@ -68,3 +73,12 @@ def index():
     pages = main.paginate(page=page, per_page=100)
 
     return render_template('index.html', pages=pages)
+
+
+@app.route('/currencies/<string:name>/')
+def currencies(name):
+    # curr = request.args.get('')
+    print(name)
+    coin = Coin.query.filter_by(name=name).first()
+    print(coin)
+    return render_template('currencies.html', coin=coin)
