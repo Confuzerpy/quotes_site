@@ -29,21 +29,15 @@
 
 		.coin {
 			display: grid;
-			grid-template-columns: 1fr 2fr 3fr 3fr 4fr 4fr 1fr;
-			/*grid-template-columns:repeat(7, 1fr);*/
-			/*grid-gap: 2em;*/
-			/*grid-row-gap: 5em*/
+			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr;
 			margin-bottom: 1em;
-			 /*grid-auto-rows: : 150px; */
-			/*grid-auto-rows: minmax(100px, auto);*/
 		}
 
 		.name_columns {
 			display: grid;
-			grid-template-columns: 1fr 2fr 3fr 3fr 4fr 4fr 1fr;
-			/*grid-gap: 5em;*/
-			/*grid-row-gap: 1em*/
+			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr;
 			margin-bottom: 1em;
+			margin-top: 5em;
 		}
 
 	</style>
@@ -56,15 +50,15 @@
 
 		</div>
 
-		<div class="symbol">
-
-			symbol
-
-    	</div>
-
     	<div class="name">
 
     		name
+
+    	</div>
+
+		<div class="symbol">
+
+			symbol
 
     	</div>
 
@@ -105,17 +99,18 @@
 
 		    		</div>
 
+		    		<div class="name">
+
+		    			<a href="/currencies/{{ col['name'] }}">{{ col['name'] }}</a>
+
+		    		</div>
+
 		    		<div class="symbol">
 
 		    			{{ col['symbol'] }}
 
 		    		</div>
 
-		    		<div class="name">
-
-		    			{{ col['name'] }}
-
-		    		</div>
 
 		    		<div class="price">
 
@@ -148,7 +143,7 @@
 
    	<div class="pagination">
 
-   		<li {% if not pages.has_prev %} class="disabled" {% endif %}>
+   		<li {% if not pages.has_prev %} class="disabled" {% endif %} >
 
 			<a href="./?page={{ pages.prev_num }}">&nbsp;сюда</a>
 
@@ -156,7 +151,7 @@
 
    		{% for page in pages.iter_pages() %}
 
-   			<li {% if page == pages.page %} class="active" {% endif %}>
+   			<li {% if page == pages.page %} class="active" {% endif %} >
 
    				<a href="./?page={{ page }}"> {{ page }} </a>
 
@@ -164,7 +159,7 @@
 
    		{% endfor %}
 
-		<li {% if not pages.has_next %} class="disabled" {% endif %}>
+		<li {% if not pages.has_next %} class="disabled" {% endif %} >
 
 			<a href="./?page={{ pages.next_num }}">туда&nbsp;</a>
 
