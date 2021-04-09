@@ -29,13 +29,13 @@
 
 		.coin {
 			display: grid;
-			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr;
+			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;
 			margin-bottom: 1em;
 		}
 
 		.name_columns {
 			display: grid;
-			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr;
+			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;
 			margin-bottom: 1em;
 			margin-top: 5em;
 		}
@@ -70,19 +70,25 @@
 
     	<div class="market_cap">
 
-    		market_cap
+    		market cap
 
     	</div>
 
     	<div class="volume_24h">
 
-    		volume_24h
+    		volume(24h)
 
     	</div>
 
     	<div class="delta_24h">
 
-    		delta_24h
+    		delta(24h)
+
+    	</div>
+
+    	<div class="last_7_days">
+
+    		last 7 days
 
     	</div>
 
@@ -133,6 +139,12 @@
 		    		<div class="delta_24h">
 
 		    			{{ col['delta_24h'] }}
+
+		    		</div>
+
+		    		<div class="last_7_days">
+
+		    			<img src="/static/images/chart_7_d.png" alt="Chart" height="100%" width="100%">
 
 		    		</div>
 

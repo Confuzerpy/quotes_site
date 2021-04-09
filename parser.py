@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup as bs
-from list_pars import lst_pars
+# from list_pars import lst_pars
 import requests
 import json
 
