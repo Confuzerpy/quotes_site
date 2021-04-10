@@ -1,8 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="id">
-		{{ coin['market_cap'] }}
-		<img src="/static/images/chart_7_d.png" alt="Chart" height="50%" width="50%">
+
+	<div class="currencies">
+
+		<div class="id">
+			{{ coin['id'] }}
+		</div>
+
+		<div class="name">
+			{{ coin['name'] }}
+		</div>
+
+		<div class="price">
+			{{ coin['price']}}
+		</div>
+
+		<div class="market_cap">
+			{{ coin['market_cap'] }}
+		</div>
+
+		<div class="volume_24h">
+			{{ coin['volume_24h'] }}
+		</div>
+
+		<div class="delta_24h">
+			{{ coin['delta_24h'] }}
+		</div>
+
+		<div class="chart">
+			<img src="/static/images/chart_7_d.png" alt="Chart" height="50%" width="50%">
+		</div>
+
 	</div>
+
 {% endblock %}

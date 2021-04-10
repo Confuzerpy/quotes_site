@@ -44,14 +44,33 @@ def index(page=1):
 
     main = db.session.query(Coin)  # .all()
     pages = main.paginate(page=page, per_page=100)
-    count = 0
-    for col in pages.items:
-        count += 1
-        name = col.name
-        print(name)
-        coin = Coin.query.filter_by(name=name).first()
-        price = coin.price_history
-        chart_7_days(price, count)
+    if str(pages.items[::-1][0]) == 'Coin 100':
+        count = 0
+        for col in pages.items:
+            count += 1
+            name = col.name
+            coin = Coin.query.filter_by(name=name).first()
+            price = coin.price_history
+            chart_7_days(price, count)
+
+    elif str(pages.items[::-1][0]) == 'Coin 200':
+        print('norm')
+        count = 100
+        for col in pages.items:
+            count += 1
+            name = col.name
+            coin = Coin.query.filter_by(name=name).first()
+            price = coin.price_history
+            chart_7_days(price, count)
+
+    elif str(pages.items[::-1][0]) == 'Coin 300':
+        count = 200
+        for col in pages.items:
+            count += 1
+            name = col.name
+            coin = Coin.query.filter_by(name=name).first()
+            price = coin.price_history
+            chart_7_days(price, count)
 
     return render_template('index.html', pages=pages)
 
@@ -65,7 +84,7 @@ def currencies(name):
     # print(type(name))
     coin = Coin.query.filter_by(name=name).first()
     price = coin.price_history
-    # print(type(price))
+    # print(price)
     chart_7_days(price)
     # print(coin)
     # print(type(coin))

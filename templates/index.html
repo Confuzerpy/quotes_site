@@ -7,10 +7,10 @@
     	/* Pagination links */
 		.pagination a {
 		    color: black;
-		    justify-self: center;
 		    padding: 8px 16px;
 		    text-decoration: none;
 		    transition: background-color .3s;
+		    justify-self: right;
 		}
 
 		/* Style the active/current link */
@@ -29,15 +29,21 @@
 
 		.coin {
 			display: grid;
-			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;
+			/*grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;*/
+			grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr 2fr 2fr;
 			margin-bottom: 1em;
+			grid-auto-columns: minmax(150px, auto);
+			justify-items: center;
 		}
 
 		.name_columns {
 			display: grid;
-			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;
+			/*grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;*/
+			grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr 2fr 2fr;
 			margin-bottom: 1em;
 			margin-top: 5em;
+			grid-auto-columns: minmax(600px, auto);
+			justify-items: center;
 		}
 
 	</style>
@@ -52,43 +58,43 @@
 
     	<div class="name">
 
-    		name
+    		Name
 
     	</div>
 
 		<div class="symbol">
 
-			symbol
+			Symbol
 
     	</div>
 
     	<div class="price">
 
-    		price
+    		Price
 
     	</div>
 
     	<div class="market_cap">
 
-    		market cap
+    		Market Cap
 
     	</div>
 
     	<div class="volume_24h">
 
-    		volume(24h)
+    		Volume(24h)
 
     	</div>
 
     	<div class="delta_24h">
 
-    		delta(24h)
+    		Delta(24h)
 
     	</div>
 
     	<div class="last_7_days">
 
-    		last 7 days
+    		Last 7 days
 
     	</div>
 
@@ -120,31 +126,31 @@
 
 		    		<div class="price">
 
-		    			{{ col['price'] }}
+		    			<a>$</a>{{ col['price'] }}
 
 		    		</div>
 
 		    		<div class="market_cap">
 
-		    			{{ col['market_cap'] }}
+		    			<a>$</a>{{ col['market_cap'] }}
 
 		    		</div>
 
 		    		<div class="volume_24h">
 
-		    			{{ col['volume_24h'] }}
+		    			<a>$</a>{{ col['volume_24h'] }}
 
 		    		</div>
 
 		    		<div class="delta_24h">
 
-		    			{{ col['delta_24h'] }}
+		    			{{ col['delta_24h'] }}<a>%</a>
 
 		    		</div>
 
 		    		<div class="last_7_days">
 
-		    			<img src="/static/images/chart_7_d.png" alt="Chart" height="100%" width="100%">
+		    			<img src="/static/images/chart_{{col['id'] }}.png" alt="Chart" height="80%" width="80%">
 
 		    		</div>
 

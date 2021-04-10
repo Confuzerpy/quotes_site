@@ -36,7 +36,14 @@ for coins in lst_coins:
             lst_market_cap_history = eval(coin.market_cap_history)
 
             price_history = cur_coin['price']
+
+            if float(price_history) == 1000 or float(price_history) > 1000:
+                price_history = price_history.split('.')[0]
+            else:
+                price_history = str(round(float(price_history), 2))
+
             market_cap_history = cur_coin['market_cap']
+            market_cap_history = market_cap_history.split('.')[0]
 
             lst_price_history.append(price_history)
             lst_price_history = str(lst_price_history)
@@ -47,12 +54,20 @@ for coins in lst_coins:
             coin.market_cap_history = lst_market_cap_history
 
             price = cur_coin['price']
-            coin.price = price
+
+            if float(price) == 1000 or float(price) > 1000:
+                price = price.split('.')[0]
+                coin.price = price
+            else:
+                price = round(float(price), 2)
+                coin.price = str(price)
 
             market_cap = cur_coin['market_cap']
+            market_cap = market_cap.split('.')[0]
             coin.market_cap = market_cap
 
             volume_24h = cur_coin['volume_24h']
+            volume_24h = volume_24h.split('.')[0]
             coin.volume_24h = volume_24h
 
             delta_24h = cur_coin['delta_24h']
@@ -74,12 +89,19 @@ for coins in lst_coins:
             coin.name = name
 
             price = cur_coin['price']
-            coin.price = price
+            if float(price) == 1000 or float(price) > 1000:
+                price = price.split('.')[0]
+                coin.price = price
+            else:
+                price = round(float(price), 2)
+                coin.price = str(price)
 
             market_cap = cur_coin['market_cap']
+            market_cap = market_cap.split('.')[0]
             coin.market_cap = market_cap
 
             volume_24h = cur_coin['volume_24h']
+            volume_24h = volume_24h.split('.')[0]
             coin.volume_24h = volume_24h
 
             delta_24h = cur_coin['delta_24h']
@@ -97,17 +119,3 @@ for coins in lst_coins:
             # db.session.add(create)
             # db.session.flush()
             db.session.commit()
-
-            # print(coin.market_cap_history)
-
-            # name_id = coin.id()
-
-            # print('lst', lst_price_history)
-            # print('type', type(lst_price_history))
-            # for i in coin:
-            #     print(i)
-            # print('name', type(coin))
-            # print(coin['name'])
-            # print(name_id)
-            # print('id', type(name_id))
-            # нужно юзать eval(), чтобы достать список из строки

@@ -21,6 +21,7 @@ def coinlib_pars():
 
         for r in res:
             result.append(json.loads(r.text))
+            # print(r)
             print('sparsil')
     # print(result)
     return result
