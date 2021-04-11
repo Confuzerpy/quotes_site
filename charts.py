@@ -7,10 +7,18 @@ def chart_7_days(price, count=0):
     print(type(price))
     len_price = len(price)
     if len_price == 7:
-        plt.plot((1, 2, 3, 4, 5, 6, 7),
-                 (float(price[0]), float(price[1]), float(price[2]),
-                  float(price[3]), float(price[4]), float(price[5]),
-                  float(price[6])), linewidth=3, color='limegreen')
+        last_price = float(price[6])
+        pen_price = float(price[5])
+        if last_price > pen_price or last_price == pen_price:
+            plt.plot((1, 2, 3, 4, 5, 6, 7),
+                     (float(price[0]), float(price[1]), float(price[2]),
+                      float(price[3]), float(price[4]), float(price[5]),
+                      float(price[6])), linewidth=3, color='limegreen')
+        else:
+            plt.plot((1, 2, 3, 4, 5, 6, 7),
+                     (float(price[0]), float(price[1]), float(price[2]),
+                      float(price[3]), float(price[4]), float(price[5]),
+                      float(price[6])), linewidth=3, color='red')
 
     elif len_price > 7:
         # print(type(price))
@@ -18,38 +26,84 @@ def chart_7_days(price, count=0):
         # print(price)
         price = price[:7]
         price.reverse()
-        plt.plot((1, 2, 3, 4, 5, 6, 7),
-                 (float(price[0]), float(price[1]), float(price[2]),
-                  float(price[3]), float(price[4]), float(price[5]),
-                  float(price[6])), linewidth=3, color='limegreen')
+        last_price = float(price[6])
+        pen_price = float(price[5])
+        if last_price > pen_price or last_price == pen_price:
+            plt.plot((1, 2, 3, 4, 5, 6, 7),
+                     (float(price[0]), float(price[1]), float(price[2]),
+                      float(price[3]), float(price[4]), float(price[5]),
+                      float(price[6])), linewidth=3, color='limegreen')
+        else:
+            plt.plot((1, 2, 3, 4, 5, 6, 7),
+                     (float(price[0]), float(price[1]), float(price[2]),
+                      float(price[3]), float(price[4]), float(price[5]),
+                      float(price[6])), linewidth=3, color='red')
 
     elif len_price < 7:
         if len_price == 6:
-            plt.plot((1, 2, 3, 4, 5, 6),
-                     (float(price[0]), float(price[1]), float(price[2]),
-                      float(price[3]), float(price[4]), float(price[5])),
-                     linewidth=3, color='limegreen')
+            last_price = float(price[5])
+            pen_price = float(price[4])
+            if last_price > pen_price or last_price == pen_price:
+                plt.plot((1, 2, 3, 4, 5, 6),
+                         (float(price[0]), float(price[1]), float(price[2]),
+                          float(price[3]), float(price[4]), float(price[5])),
+                         linewidth=3, color='limegreen')
+            else:
+                plt.plot((1, 2, 3, 4, 5, 6),
+                         (float(price[0]), float(price[1]), float(price[2]),
+                          float(price[3]), float(price[4]), float(price[5])),
+                         linewidth=3, color='red')
 
         elif len_price == 5:
-            plt.plot((1, 2, 3, 4, 5),
-                     (float(price[0]), float(price[1]), float(price[2]),
-                      float(price[3]), float(price[4])),
-                     linewidth=3, color='limegreen')
+            last_price = float(price[4])
+            pen_price = float(price[3])
+            if last_price > pen_price or last_price == pen_price:
+                plt.plot((1, 2, 3, 4, 5),
+                         (float(price[0]), float(price[1]), float(price[2]),
+                          float(price[3]), float(price[4])),
+                         linewidth=3, color='limegreen')
+            else:
+                plt.plot((1, 2, 3, 4, 5),
+                         (float(price[0]), float(price[1]), float(price[2]),
+                          float(price[3]), float(price[4])),
+                         linewidth=3, color='red')
 
         elif len_price == 4:
-            plt.plot((1, 2, 3, 4),
-                     (float(price[0]), float(price[1]),
-                      float(price[2]), float(price[3])),
-                     linewidth=3, color='limegreen')
+            last_price = float(price[3])
+            pen_price = float(price[2])
+            if last_price > pen_price or last_price == pen_price:
+                plt.plot((1, 2, 3, 4),
+                         (float(price[0]), float(price[1]),
+                          float(price[2]), float(price[3])),
+                         linewidth=3, color='limegreen')
+            else:
+                plt.plot((1, 2, 3, 4),
+                         (float(price[0]), float(price[1]),
+                          float(price[2]), float(price[3])),
+                         linewidth=3, color='red')
 
         elif len_price == 3:
-            plt.plot((1, 2, 3), (float(price[0]), float(price[1]),
-                                 float(price[2])),
-                     linewidth=3, color='limegreen')
+            last_price = float(price[2])
+            pen_price = float(price[1])
+            if last_price > pen_price or last_price == pen_price:
+                plt.plot((1, 2, 3), (float(price[0]), float(price[1]),
+                                     float(price[2])),
+                         linewidth=3, color='limegreen')
+            else:
+                plt.plot((1, 2, 3), (float(price[0]), float(price[1]),
+                                     float(price[2])),
+                         linewidth=3, color='red')
 
         elif len_price == 2:
-            plt.plot((1, 2), (float(price[0]), float(price[1])),
-                     linewidth=3, color='limegreen')
+            last_price = float(price[1])
+            pen_price = float(price[0])
+            if last_price > pen_price or last_price == pen_price:
+                plt.plot((1, 2), (float(price[0]), float(price[1])),
+                         linewidth=3, color='limegreen')
+            else:
+                plt.plot((1, 2), (float(price[0]), float(price[1])),
+                         linewidth=3, color='red')
+
 
     # plt.show()
     if count == 0:
