@@ -9,6 +9,7 @@ def chart_7_days(price, count=0):
     if len_price == 7:
         last_price = float(price[6])
         pen_price = float(price[5])
+
         if last_price > pen_price or last_price == pen_price:
             plt.plot((1, 2, 3, 4, 5, 6, 7),
                      (float(price[0]), float(price[1]), float(price[2]),
@@ -21,9 +22,7 @@ def chart_7_days(price, count=0):
                       float(price[6])), linewidth=3, color='red')
 
     elif len_price > 7:
-        # print(type(price))
         price.reverse()
-        # print(price)
         price = price[:7]
         price.reverse()
         last_price = float(price[6])
@@ -40,9 +39,11 @@ def chart_7_days(price, count=0):
                       float(price[6])), linewidth=3, color='red')
 
     elif len_price < 7:
+
         if len_price == 6:
             last_price = float(price[5])
             pen_price = float(price[4])
+
             if last_price > pen_price or last_price == pen_price:
                 plt.plot((1, 2, 3, 4, 5, 6),
                          (float(price[0]), float(price[1]), float(price[2]),
@@ -57,6 +58,7 @@ def chart_7_days(price, count=0):
         elif len_price == 5:
             last_price = float(price[4])
             pen_price = float(price[3])
+
             if last_price > pen_price or last_price == pen_price:
                 plt.plot((1, 2, 3, 4, 5),
                          (float(price[0]), float(price[1]), float(price[2]),
@@ -71,6 +73,7 @@ def chart_7_days(price, count=0):
         elif len_price == 4:
             last_price = float(price[3])
             pen_price = float(price[2])
+
             if last_price > pen_price or last_price == pen_price:
                 plt.plot((1, 2, 3, 4),
                          (float(price[0]), float(price[1]),
@@ -85,6 +88,7 @@ def chart_7_days(price, count=0):
         elif len_price == 3:
             last_price = float(price[2])
             pen_price = float(price[1])
+
             if last_price > pen_price or last_price == pen_price:
                 plt.plot((1, 2, 3), (float(price[0]), float(price[1]),
                                      float(price[2])),
@@ -97,6 +101,7 @@ def chart_7_days(price, count=0):
         elif len_price == 2:
             last_price = float(price[1])
             pen_price = float(price[0])
+
             if last_price > pen_price or last_price == pen_price:
                 plt.plot((1, 2), (float(price[0]), float(price[1])),
                          linewidth=3, color='limegreen')
@@ -104,13 +109,11 @@ def chart_7_days(price, count=0):
                 plt.plot((1, 2), (float(price[0]), float(price[1])),
                          linewidth=3, color='red')
 
-
-    # plt.show()
     if count == 0:
         plt.savefig('static/images/chart_7_d.png')
         plt.close()
     else:
         plt.xticks([])
         plt.yticks([])
-        plt.savefig(f'static/images/chart_{str(count)}.png', dpi=50)
+        plt.savefig(f'static/images/chart_{str(count)}.png', dpi=20)
         plt.close()

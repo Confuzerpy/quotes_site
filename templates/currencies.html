@@ -2,34 +2,105 @@
 
 {% block content %}
 
+	<style>
+
+		.head {
+			display: grid;
+			grid-template-rows: : 1fr 1fr 1fr
+			justify-items: left;
+			margin-top: 5em;
+		}
+
+		.currencies {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			justify-items: right;
+		}
+
+/*		.chart {
+			display: grid;
+			grid-template-columns: 5fr
+		}*/
+
+/*		.coin {
+			display: grid;
+			grid-template-columns: 1fr 3fr 2fr 3fr 4fr 4fr 1fr 2fr;
+			grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2fr 2fr 2fr;
+			margin-bottom: 1em;
+			grid-auto-columns: minmax(150px, auto);
+			justify-items: center;
+		}*/
+	</style>
+
+
+	<div class="head">
+
+		<div>
+		    {{ coin['id'] }}
+		</div>
+
+		<div>
+			{{ coin['name'] }}
+		</div>
+
+		<div>
+			${{ coin['price'] }}
+		</div>
+
+	</div>
+
+	<div class="chart">
+		<img src="/static/images/chart_7_d.png" alt="Chart" height="50%" width="50%">
+	</div>
+
 	<div class="currencies">
+
+		<div>
+			<a>id:</a>
+		</div>
 
 		<div class="id">
 			{{ coin['id'] }}
+		</div>
+
+		<div>
+			<a>Name:</a>
 		</div>
 
 		<div class="name">
 			{{ coin['name'] }}
 		</div>
 
+		<div>
+			<a>Price</a>
+		</div>
+
 		<div class="price">
 			{{ coin['price']}}
+		</div>
+
+		<div>
+			<a>Market Cap</a>
 		</div>
 
 		<div class="market_cap">
 			{{ coin['market_cap'] }}
 		</div>
 
+		<div>
+			<a>Volume(24h)</a>
+		</div>
+
 		<div class="volume_24h">
 			{{ coin['volume_24h'] }}
 		</div>
 
-		<div class="delta_24h">
-			{{ coin['delta_24h'] }}
+		<div>
+			<a>Delta(24h)</a>
 		</div>
 
-		<div class="chart">
-			<img src="/static/images/chart_7_d.png" alt="Chart" height="50%" width="50%">
+		<div class="delta_24h">
+			{{ coin['delta_24h'] }}
 		</div>
 
 	</div>
