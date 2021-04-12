@@ -37,6 +37,17 @@ class Coin(db.Model):
 @app.route('/')
 @app.route('/<int:page>/')
 def index(page=1):
+    search = request.args.get('search')
+    if search:
+        search = search.title()
+        coin = Coin.query.filter_by(name=search).first_or_404()
+        price = coin.price_history
+        if current_datetime.minute == 0:
+            subprocess.call(['python3', 'create_db.py'])
+        chart_7_days(price)
+        return render_template('currencies.html', coin=coin)
+
+
     page = request.args.get('page')
 
     if page and page.isdigit():
@@ -44,7 +55,7 @@ def index(page=1):
     else:
         page = 1
 
-    main = db.session.query(Coin)  # .all()
+    main = db.session.query(Coin)
     pages = main.paginate(page=page, per_page=100)
     if current_datetime.minute == 0:
         subprocess.call(['python3', 'create_db.py'])
@@ -64,7 +75,6 @@ def index(page=1):
                 name = col.name
                 coin = Coin.query.filter_by(name=name).first()
                 price = coin.price_history
-                subprocess.call(['python3', 'create_db.py'])
                 chart_7_days(price, count)
 
         elif str(pages.items[::-1][0]) == 'Coin 300':
@@ -74,7 +84,6 @@ def index(page=1):
                 name = col.name
                 coin = Coin.query.filter_by(name=name).first()
                 price = coin.price_history
-                subprocess.call(['python3', 'create_db.py'])
                 chart_7_days(price, count)
 
     return render_template('index.html', pages=pages)
@@ -85,9 +94,25 @@ def index(page=1):
 
 @app.route('/currencies/<string:name>/')
 def currencies(name):
-    coin = Coin.query.filter_by(name=name).first()
+    coin = Coin.query.filter_by(name=name).first_or_404()
     price = coin.price_history
     if current_datetime.minute == 0:
         subprocess.call(['python3', 'create_db.py'])
     chart_7_days(price)
     return render_template('currencies.html', coin=coin)
+
+
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+# @app.route('/search/<string:name>')
+# def search_currency(name):
+#     print('test')
+#     print(name)
+    # coin = Coin.query.filter_by(name=name).first_or_404()
+    # price = coin.price_history
+    # if current_datetime.minute == 0:
+    #     subprocess.call(['python3', 'create_db.py'])
+    # chart_7_days(price)
+    # return render_template('currencies.html', coin=coin)
