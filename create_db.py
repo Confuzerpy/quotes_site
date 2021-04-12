@@ -7,13 +7,15 @@ lst_coins = coinlib_pars()
 # lst_coins = lst
 current_datetime = datetime.now()
 
+count = 0
 for coins in lst_coins:
+    count += 1
+    print(count)
     coins_dct = coins['coins']
 
     for cur_coin in coins_dct:
         symbol = cur_coin['symbol']
         name = cur_coin['name']
-        # print(name)
 
         if current_datetime.hour == 23:
             coin = Coin.query.filter_by(name=name).first()

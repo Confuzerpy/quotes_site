@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 def chart_7_days(price, count=0):
     price = eval(price)
-    print(type(price))
     len_price = len(price)
     if len_price == 7:
         last_price = float(price[6])

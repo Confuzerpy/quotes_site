@@ -47,6 +47,7 @@ def index(page=1):
     main = db.session.query(Coin)  # .all()
     pages = main.paginate(page=page, per_page=100)
     if current_datetime.minute == 0:
+        subprocess.call(['python3', 'create_db.py'])
         if str(pages.items[::-1][0]) == 'Coin 100':
             count = 0
             for col in pages.items:
@@ -54,20 +55,16 @@ def index(page=1):
                 name = col.name
                 coin = Coin.query.filter_by(name=name).first()
                 price = coin.price_history
-                process = subprocess.Popen('create_db.py')
-                process.wait()
                 chart_7_days(price, count)
 
         elif str(pages.items[::-1][0]) == 'Coin 200':
-            print('norm')
             count = 100
             for col in pages.items:
                 count += 1
                 name = col.name
                 coin = Coin.query.filter_by(name=name).first()
                 price = coin.price_history
-                process = subprocess.Popen('create_db.py')
-                process.wait()
+                subprocess.call(['python3', 'create_db.py'])
                 chart_7_days(price, count)
 
         elif str(pages.items[::-1][0]) == 'Coin 300':
@@ -77,8 +74,7 @@ def index(page=1):
                 name = col.name
                 coin = Coin.query.filter_by(name=name).first()
                 price = coin.price_history
-                process = subprocess.Popen('create_db.py')
-                process.wait()
+                subprocess.call(['python3', 'create_db.py'])
                 chart_7_days(price, count)
 
     return render_template('index.html', pages=pages)
@@ -92,7 +88,6 @@ def currencies(name):
     coin = Coin.query.filter_by(name=name).first()
     price = coin.price_history
     if current_datetime.minute == 0:
-        process = subprocess.Popen('create_db.py')
-        process.wait()
-        chart_7_days(price)
+        subprocess.call(['python3', 'create_db.py'])
+    chart_7_days(price)
     return render_template('currencies.html', coin=coin)
