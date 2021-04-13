@@ -10,7 +10,7 @@
 		    padding: 8px 16px;
 		    text-decoration: none;
 		    transition: background-color .3s;
-		    justify-self: right;
+		    justify-self: center;
 		}
 
 		/* Style the active/current link */
@@ -22,10 +22,10 @@
 		/* Add a grey background color on mouse-over */
 		.pagination a:hover:not(.active) {background-color: #ddd;}
 
-		.status {
+/*		.status {
 			justify-self: left;
 
-		}
+		}*/
 
 		.coin {
 			display: grid;
@@ -159,29 +159,31 @@
 	    <hr>
     {% endfor %}
 
-   	<div class="pagination">
+	<nav>
+        <ul class="pagination">
+            {% if not pages.has_prev %}
+                <li>&laquo;сюда</li>
+            {% else %}
+                <li>
+                    <a href="./?page={{ pages.prev_num }}" aria-disabled="true">&laquo;сюда</a>
+                </li>
+            {% endif %}
 
-   		<li {% if not pages.has_prev %} class="disabled" {% endif %} >
+            {% for page in pages.iter_pages() %}
+				<li {% if page == pages.page %} class="active" {% endif %}>
+					<a href="./?page={{ page }}"> {{ page }} <span class="sr-only">(current)</span>
+					</a>
+				</li>
+			{% endfor %}
 
-			<a href="./?page={{ pages.prev_num }}">&nbsp;сюда</a>
-
-   		</li>
-
-   		{% for page in pages.iter_pages() %}
-
-   			<li {% if page == pages.page %} class="active" {% endif %} >
-
-   				<a href="./?page={{ page }}"> {{ page }} </a>
-
-   			</li>
-
-   		{% endfor %}
-
-		<li {% if not pages.has_next %} class="disabled" {% endif %} >
-
-			<a href="./?page={{ pages.next_num }}">туда&nbsp;</a>
-
-		</li>
-	</div>
+            {% if not pages.has_next %}
+                <li>туда&raquo;</li>
+            {% else %}
+                <li>
+                    <a href="./?page={{ pages.next_num }}" aria-disabled="true">туда&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 
 {% endblock %}

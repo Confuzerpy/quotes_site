@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-# from app import *
 
 
 def chart_7_days(price, count=0):

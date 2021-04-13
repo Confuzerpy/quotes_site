@@ -4,13 +4,11 @@ from parser import coinlib_pars
 from datetime import datetime
 
 lst_coins = coinlib_pars()
-# lst_coins = lst
+# lst_coins = lst # для тестирования приложения, чтобы не нагружать API
 current_datetime = datetime.now()
 
-count = 0
+
 for coins in lst_coins:
-    count += 1
-    print(count)
     coins_dct = coins['coins']
 
     for cur_coin in coins_dct:
@@ -22,7 +20,6 @@ for coins in lst_coins:
 
             coin.symbol = symbol
             coin.name = name
-            # coin_id = coin.id
             """всё, что закоментированно - юзать только при первом запуске,
             если бд пустая"""
             # lst_price = []

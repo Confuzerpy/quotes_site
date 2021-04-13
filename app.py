@@ -12,6 +12,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+"""Класс для создания бд"""
+
+
 class Coin(db.Model):
     __tablename__ = 'coins'
     id = db.Column(db.Integer, primary_key=True)
@@ -31,25 +34,38 @@ class Coin(db.Model):
         return 'Coin %r' % self.id
 
 
+"""Запрещаем браузеру кэшировать"""
+
+
+@app.after_request
+def add_header(response):
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
+
+
 """Главная страница"""
 
 
 @app.route('/')
 @app.route('/<int:page>/')
 def index(page=1):
+    print(1)
     search = request.args.get('search')
+    # если пользователь ввёл запрос в поиск
     if search:
-        search = search.title()
+        if not search.isupper():
+            search = search.title()
         coin = Coin.query.filter_by(name=search).first_or_404()
         price = coin.price_history
+        # если минута == 0, то вызываем скрипт create_db для парсинга
         if current_datetime.minute == 0:
             subprocess.call(['python3', 'create_db.py'])
         chart_7_days(price)
         return render_template('currencies.html', coin=coin)
 
-
     page = request.args.get('page')
-
+    # если пользователь перешёл на другую страницу
     if page and page.isdigit():
         page = int(page)
     else:
@@ -57,7 +73,8 @@ def index(page=1):
 
     main = db.session.query(Coin)
     pages = main.paginate(page=page, per_page=100)
-    if current_datetime.minute == 0:
+    # если минута == 0, вызываем парсер и рисуем графики
+    if str(current_datetime.minute) == '00':
         subprocess.call(['python3', 'create_db.py'])
         if str(pages.items[::-1][0]) == 'Coin 100':
             count = 0
@@ -89,14 +106,14 @@ def index(page=1):
     return render_template('index.html', pages=pages)
 
 
-"""Страница монет"""
+"""Страница каждой монеты"""
 
 
 @app.route('/currencies/<string:name>/')
 def currencies(name):
     coin = Coin.query.filter_by(name=name).first_or_404()
     price = coin.price_history
-    if current_datetime.minute == 0:
+    if str(current_datetime.minute) == '00':
         subprocess.call(['python3', 'create_db.py'])
     chart_7_days(price)
     return render_template('currencies.html', coin=coin)
@@ -105,14 +122,3 @@ def currencies(name):
 @app.route('/about/')
 def about():
     return render_template('about.html')
-
-# @app.route('/search/<string:name>')
-# def search_currency(name):
-#     print('test')
-#     print(name)
-    # coin = Coin.query.filter_by(name=name).first_or_404()
-    # price = coin.price_history
-    # if current_datetime.minute == 0:
-    #     subprocess.call(['python3', 'create_db.py'])
-    # chart_7_days(price)
-    # return render_template('currencies.html', coin=coin)
